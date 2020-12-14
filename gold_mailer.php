@@ -1,12 +1,21 @@
 <?php
-
+/*~ Automated mailer report .
+.---------------------------------------------------------------------------.
+|
+|   Authors: Anshul Singh |
+| ------------------------------------------------------------------------- |
+| This program is distributed in the hope that it will be useful - WITHOUT  |
+| ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     |
+| FITNESS FOR A PARTICULAR PURPOSE.                                         |
+'---------------------------------------------------------------------------'
+*/
 include 'includes/MysqliDb.php';
 include 'includes/common.php';
 include 'includes/class.phpmailer.php';
 
-$mysqli = new Mysqlidb ("localhost", "root", "", "confab_intext_nseit");
+$mysqli = new Mysqlidb ("localhost", "root", "", "DB_name");
 
-DEFINE("SOYBEAN_PRICES", "confab_intext_nseit.nse_international_prices");
+DEFINE("SOYBEAN_PRICES", "DB_name.Table_name");
 
 $message="
 <!DOCTYPE html>
@@ -63,7 +72,7 @@ th{
     
     
     
-    $gold_price = $mysqli->get("confab_intext_nseit.nse_international_prices","3");
+    $gold_price = $mysqli->get("SOYBEAN_PRICES", "DB_name.Table_name","3");
     if(isset($gold_price) && count($gold_price) > 1){
     echo "<pre>";
     print_r ($gold_price);
@@ -143,14 +152,11 @@ th{
 
 
 
-    $mail->AddAddress('apandit@nse.co.in');
+    $mail->AddAddress('anshul.singh@pinstorm.com');
     
-    $mail->AddCC('dl-surv-all@nse.co.in');
+ 
     $mail->AddCC('anshul.singh@pinstorm.com');
-    $mail->AddCC('nitin.jadhav@pinstorm.com');
-    $mail->AddCC('jayesh@pinstorm.com');
-    $mail->AddCC('carlyle.oliver@pinstorm.com');
-    $mail->AddCC('nikhil@pinstorm.com');
+
    
 
 
